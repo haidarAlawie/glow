@@ -19,6 +19,7 @@ class BlogSerializer(serializers.ModelSerializer):
 		'title',
 		'content',
 		'date',
+		'modified_date'
 		]
 
 class CommentSerializer(serializers.ModelSerializer):
