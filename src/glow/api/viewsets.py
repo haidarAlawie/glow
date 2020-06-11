@@ -64,16 +64,19 @@ class BlogViewSet(viewsets.ViewSet):
 
 	#update blog post 
 	def update(self, request,pk=None, *args, **kwargs):
-		queryset = Blog.objects.all()
-		#get post that needs to be updated
-		obj = get_object_or_404(queryset, pk=pk)
-		requested = request.data
-		obj.title=requested["title"]
-		obj.content= requested["content"]
-		obj.modified_date= timezone.localtime(timezone.now())
-		obj.save()
-		serializer= BlogSerializer(obj)
-		return Response(serializer.data)
+		if request.user.is_staff:
+
+			queryset = Blog.objects.all()
+			#get post that needs to be updated
+			obj = get_object_or_404(queryset, pk=pk)
+			requested = request.data
+			obj.title=requested["title"]
+			obj.content= requested["content"]
+			obj.modified_date= timezone.localtime(timezone.now())
+			obj.save()
+			serializer= BlogSerializer(obj)
+			return Response(serializer.data)
+		return Response("Access denied: You are not an admin")
 	
 	#list all blog posts
 	def list(self, request):
