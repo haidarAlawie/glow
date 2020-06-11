@@ -18,7 +18,6 @@ class BlogSerializer(serializers.ModelSerializer):
 		'user',
 		'title',
 		'content',
-		'author',
 		'date',
 		]
 
