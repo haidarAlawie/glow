@@ -23,9 +23,10 @@ class BlogViewSet(viewsets.ViewSet):
 		requested.save()
 		serializer= BlogSerializer(requested)
 		return Response(serializer.data)
-
+	#update blog post 
 	def update(self, request,pk=None, *args, **kwargs):
 		queryset = Blog.objects.all()
+		#get post that needs to be updated
 		obj = get_object_or_404(queryset, pk=pk)
 		requested = request.data
 		obj.title=requested["title"]
@@ -46,6 +47,15 @@ class BlogViewSet(viewsets.ViewSet):
 		queryset = Blog.objects.all()
 		blog = get_object_or_404(queryset, pk=pk)
 		serializer = BlogSerializer(blog)
+		return Response(serializer.data)
+
+
+class Comment(viewsets.ViewSet):
+		#retrieve a single comment 
+	def retrieve(self, request, pk=None):
+		queryset = Comment.objects.all()
+		comment = get_object_or_404(queryset, pk=pk)
+		serializer = CommentSerializer(blog)
 		return Response(serializer.data)
 
 
