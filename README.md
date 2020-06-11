@@ -1,5 +1,5 @@
 # glow
-The two users created are {admin, haidar}
+The two users created (one with staff status the other without) are {admin, haidar}
 Their passwords are: {password, Lebanon123} respectively 
 
 asgiref==3.2.7
