@@ -1,3 +1,5 @@
+import datetime
+from django.utils import timezone
 from .models import Blog, Comment
 from .serializers import BlogSerializer, UserSerializer, CommentSerializer
 from rest_framework import viewsets
@@ -20,6 +22,17 @@ class BlogViewSet(viewsets.ViewSet):
 			)
 		requested.save()
 		serializer= BlogSerializer(requested)
+		return Response(serializer.data)
+
+	def update(self, request,pk=None, *args, **kwargs):
+		queryset = Blog.objects.all()
+		obj = get_object_or_404(queryset, pk=pk)
+		requested = request.data
+		obj.title=requested["title"]
+		obj.content= requested["content"]
+		obj.modified_date= timezone.localtime(timezone.now())
+		obj.save()
+		serializer= BlogSerializer(obj)
 		return Response(serializer.data)
 	
 	#list all blog posts
