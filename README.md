@@ -1,4 +1,6 @@
 # glow
+This is an API for a simple Blog application. It was done as part of an exam for a company namely GLOW. 
+
 The two users created (one with staff status the other without) are {admin, haidar}
 Their passwords are: {password, Lebanon123} respectively 
 
